@@ -4,8 +4,9 @@
             <img :src="RESULT_TITLE_LIST[resultIndex]"
                  style="position:relative; width: 70%; left: 15%; margin-top: 10%; margin-bottom: 2%;" />
             <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
-                <bottle v-for="(item, index) in bottleList" :key="item.word" :word="item.word"
+                <bottle v-for="(item, index) in bottleList" :key="item.word" v-model="item.value" :word="item.word"
                         :lineIndex="Math.floor(index / 5)" :columnIndex="index % 5"
+                        :changeable="false"
                         style="width: calc((100% - 40px)/5); margin: 10px 0;" />
             </div>
         </div>
@@ -69,7 +70,7 @@
             for(let word of this.KEYWORDS_LIST){
                 res.push({
                     word: word,
-                    value: 0
+                    value: 1
                 })
             }
             return res;

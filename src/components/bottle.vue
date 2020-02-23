@@ -5,6 +5,7 @@
             @mousedown="bottleImageOnMouseDown"
             @click="bottleImageOnClick" />
         {{ word }}
+        = {{ theValue }} ({{ lineIndex }}, {{ columnIndex }})
     </div>
 </template>
 
@@ -15,6 +16,7 @@
     @Component
     export default class Bottle extends Vue{
         name = "bottle";
+        @Prop({type: Boolean, default: true})changeable: boolean;
         @Prop({type: String, default: ""})word: string;
         @Prop({type: Number, default: 0})value: number;//切莫直接调整此value的值，请使用setter！
         @Prop({type: Number, default: 0})lineIndex: number;//0~4
@@ -22,6 +24,10 @@
 
         theValue: number = 0;
         bottleClicked: boolean = false;
+
+        created() {
+            this.theValue = this.value;
+        }
 
         //点击后修改value时，请调用此函数。
         setValue(newValue: number){
@@ -39,9 +45,11 @@
         }
 
         bottleImageOnClick(e) {
-            this.theValue = (this.theValue + 1) % 6;
+            if (this.changeable) {
+                this.theValue = (this.theValue + 1) % 6;
+                this.bottleClicked = true;
+            }
             this.setValue(this.theValue);
-            this.bottleClicked = true;
         }
     }
 </script>
