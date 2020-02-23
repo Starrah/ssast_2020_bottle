@@ -4,7 +4,7 @@
             <div class="bg" style="position: fixed; background-image: url('../static/p2_bg.jpg')"></div>
             <img src="../static/p2_title.png"
                  style="position:relative; width: 70%; left: 15%; margin-top: 10%; margin-bottom: 2%;" />
-            <div style="display: flex; flex-wrap: wrap; justify-content: space-around; margin: 0 20px;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
                 <bottle v-for="(item, index) in bottleList" :key="item.word" v-model="item.value" :word="item.word"
                         :lineIndex="Math.floor(index / 5)" :columnIndex="index % 5"
                         style="width: calc((100% - 40px)/5); margin: 10px 0;" />

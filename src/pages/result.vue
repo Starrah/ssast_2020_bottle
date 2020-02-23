@@ -1,20 +1,9 @@
 <template>
     <div>
         <div v-if="showBottle">
-            <div :style="'position: relative; top: -60px; height: 120px; margin-bottom: -60px; background: rgba(' + COLOURS[resultIndex * 2] + ', 50%)'">
-                <div style="position: absolute; top: 0; left: -20px; font-size: 60px; color: rgba(255, 255, 255, 70%)">
-                    {{ TEXT[resultIndex].name }}
-                </div>
-                <div style="position: relative; top: 30px; width: 85%; left: 15%; margin-top: 60px; font-size: 16px;">
-                    <span v-html="TEXT[resultIndex].normal"></span>
-                    <br>
-                    <span style="font-size: 20px">
-                        {{ TEXT[resultIndex].largePrefix }}
-                        <strong :style="'color: rgb(' + COLOURS[resultIndex * 2 + 1] + ')'">{{ TEXT[resultIndex].largeBold }}</strong> {{ TEXT[resultIndex].largeSuffix }}
-                    </span>
-                </div>
-            </div>
-            <div style="display: flex; flex-wrap: wrap; justify-content: space-around; margin: 0 20px;">
+            <img :src="RESULT_TITLE_LIST[resultIndex]"
+                 style="position:relative; width: 70%; left: 15%; margin-top: 10%; margin-bottom: 2%;" />
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
                 <bottle v-for="(item, index) in bottleList" :key="item.word" v-model="item.value" :word="item.word"
                         :lineIndex="Math.floor(index / 5)" :columnIndex="index % 5"
                         :changeable="false"
@@ -51,7 +40,7 @@
         resultIndex: number;
         onLoad(param){
             this.showBottle = !!param.showBottle;
-            this.resultIndex = 0;//Number(param.result);
+            this.resultIndex = Number(param.result);
         }
         RESULT_TITLE_LIST = [
             "../static/p3_title_cwb.png",
@@ -76,48 +65,6 @@
             word: string,
             value: number
         }> = getApp().globalData["bottleList"];
-
-        COLOURS: Array<string> = [
-            "249, 174, 165",
-            "227, 78, 71",
-            "249, 174, 165",
-            "227, 78, 71",
-            "249, 174, 165",
-            "227, 78, 71",
-            "249, 174, 165",
-            "227, 78, 71",
-        ];
-        TEXT: Array<{
-            name: string,
-            normal: string,
-            largePrefix: string,
-            largeBold: string,
-            largeSuffix: string
-        }> = [{
-            name: "Coordination",
-            normal: "做日常的事务，演绎不平常的精彩！",
-            largePrefix: "",
-            largeBold: "常务部",
-            largeSuffix: "等你来 pick！",
-        }, {
-            name: "Technology",
-            normal: "不管你是技术大佬<br>还是零(未)基(来)础(的)同(大)学(佬)！",
-            largePrefix: "",
-            largeBold: "技术部",
-            largeSuffix: "真诚欢迎你的加入！",
-        }, {
-            name: "Games",
-            normal: "做日常的事务，演绎不平常的精彩！",
-            largePrefix: "",
-            largeBold: "常务部",
-            largeSuffix: "等你来 pick！",
-        }, {
-            name: "Projects",
-            normal: "做日常的事务，演绎不平常的精彩！",
-            largePrefix: "",
-            largeBold: "常务部",
-            largeSuffix: "等你来 pick！",
-        }];
     }
 </script>
 
