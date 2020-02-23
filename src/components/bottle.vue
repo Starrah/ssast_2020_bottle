@@ -3,9 +3,10 @@
         <div :class="{ 'bottle': true, 'bottle-clicked': bottleClicked }"
             :style="'background-image: ' + backgroundImageUrl()"
             @mousedown="bottleImageOnMouseDown"
-            @click="bottleImageOnClick" />
+            @click="bottleImageOnClick">
+        </div>
         {{ word }}
-        = {{ theValue }} ({{ lineIndex }}, {{ columnIndex }})
+        <!--= {{ theValue }} ({{ lineIndex }}, {{ columnIndex }})-->
     </div>
 </template>
 
@@ -37,7 +38,9 @@
         }
 
         backgroundImageUrl() {
-            return 'url(../static/bottle_a' + this.value + '.jpg)';
+            return 'url(../static/bottle_' +
+                (this.value === 0 ? '' : this.lineIndex.toString()) +
+                this.value + '.png)';
         }
 
         bottleImageOnMouseDown(e) {
@@ -58,15 +61,15 @@
 .bottle-container {
   background: transparent;
   text-align: center;
-  font-size: 0.3rem;
+  font-size: 16px;
 }
 .bottle {
   background-size: cover;
   position: relative;
   bottom: 0;
   left: 50%;
-  width: 150px;
-  height: 150px;
+  width: 70px;
+  height: 70px;
   transform: translate(-50%, 0) scaleX(1) scaleY(1);
   transition: transform ease 0.12s;
 }
@@ -87,13 +90,14 @@
 .bottle:after {
   content: "";
   background: url('../static/bottle_pop.png');
+  background-size: cover;
   display: block;
   position: absolute;
   top: 47%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 160px;
-  height: 160px;
+  width: 60px;
+  height: 60px;
   opacity: 0;
 }
 .bottle.bottle-clicked:after {
