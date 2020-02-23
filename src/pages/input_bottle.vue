@@ -90,7 +90,7 @@
                     minIndex = i;
                 }
             }
-            return i;
+            return minIndex;
         }
 
         hideStage1(){
