@@ -57,6 +57,7 @@
         })();
 
         toResult(){
+            getApp().globalData["bottleList"] = this.bottleList;
             this.hideStage1();
             setTimeout(()=>{
                 uni.navigateTo({
@@ -65,8 +66,31 @@
             }, 500);
         }
 
+        MODEL = [
+            [4, 4, 5, 3, 5, 3, 5, 3, 2, 5, 0, 1, 0, 1, 2, 3, 1, 1, 2, 3, 5, 5, 3, 5, 0],
+            [3, 2, 0, 5, 2, 4, 4, 5, 5, 2, 0, 1, 0, 3, 5, 5, 5, 4, 5, 4, 0, 0, 0, 0, 0],
+            [0, 3, 5, 2, 5, 1, 5, 2, 4, 5, 0, 2, 5, 0, 5, 2, 0, 5, 2, 5, 1, 0, 3, 0, 5],
+            [5, 5, 4, 3, 0, 5, 5, 4, 4, 4, 5, 5, 4, 5, 4, 1, 1, 0, 2, 3, 0, 1, 0, 0, 5]
+        ];
+
         calculateResultIndex(){
-            return 0;
+            let resArr = [];
+            for(let oneModel of this.MODEL){
+                let oneVal = 0;
+                for(let i=0;i<oneModel.length;i++){
+                    oneVal += Math.abs(oneModel[i] - this.bottleList[i].value);
+                }
+                resArr.push(oneVal);
+            }
+            let minValue = 1000;
+            let minIndex = 0;
+            for(let i=0;i<resArr.length;i++){
+                if(resArr[i] < minValue){
+                    minValue = resArr[i];
+                    minIndex = i;
+                }
+            }
+            return i;
         }
 
         hideStage1(){
@@ -110,6 +134,12 @@
         background-repeat: no-repeat;
         background-position: center 0;
         background-size: cover;
+    }
+    div.stage1 div.bg{
+        z-index: -2;
+    }
+    div.stage2 div.bg{
+        z-index: -1;
     }
     div.stage1.hide-left,
     div.stage2.hide-left{

@@ -64,16 +64,7 @@
         bottleList: Array<{
             word: string,
             value: number
-        }> = (() => {
-            let res = [];
-            for(let word of this.KEYWORDS_LIST){
-                res.push({
-                    word: word,
-                    value: 1
-                })
-            }
-            return res;
-        })();
+        }> = getApp().globalData["bottleList"];
     }
 </script>
 
