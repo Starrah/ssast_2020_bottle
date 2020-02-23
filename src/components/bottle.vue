@@ -6,7 +6,6 @@
             @click="bottleImageOnClick">
         </div>
         {{ word }}
-        <!--= {{ theValue }} ({{ lineIndex }}, {{ columnIndex }})-->
     </div>
 </template>
 
@@ -59,17 +58,16 @@
 
 <style scoped>
 .bottle-container {
-  background: transparent;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
 }
 .bottle {
   background-size: cover;
   position: relative;
   bottom: 0;
   left: 50%;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   transform: translate(-50%, 0) scaleX(1) scaleY(1);
   transition: transform ease 0.12s;
 }
