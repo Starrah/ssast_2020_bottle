@@ -65,5 +65,8 @@
     },
     "mp-qq" : {
         "usingComponents" : true
+    },
+    "h5": {
+        "publicPath": "/ssast_2020_bottle"
     }
 }

@@ -1,18 +1,24 @@
 <template>
     <div>
-        <img src="../static/p2_title.png"
-             style="position:relative; width: 70%; left: 15%; margin-top: 10%; margin-bottom: 2%;" />
-        <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
-            <bottle v-for="(item, index) in bottleList" :key="item.word" v-model="item.value" :word="item.word"
-                    :lineIndex="Math.floor(index / 5)" :columnIndex="index % 5"
-                    style="width: calc((100% - 40px)/5); margin: 10px 0;" />
+        <div class="stage1" ref="stage1">
+            <img src="../static/p2_title.png"
+                 style="position:relative; width: 70%; left: 15%; margin-top: 10%; margin-bottom: 2%;" />
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                <bottle v-for="(item, index) in bottleList" :key="item.word" v-model="item.value" :word="item.word"
+                        :lineIndex="Math.floor(index / 5)" :columnIndex="index % 5"
+                        style="width: calc((100% - 40px)/5); margin: 10px 0;" />
+            </div>
+            <div style="display: flex; justify-content: center">
+                <button class="cu-btn bg-gradual-green radius" @click="toResult"
+                        style="margin-top: 20px; padding: 5px 30px;font-size: 25px;height: 50px;">提交</button>
+            </div>
         </div>
-        <div style="display: flex; justify-content: center">
-            <button class="cu-btn bg-gradual-green radius" @click="toResult"
-                    style="margin-top: 20px; padding: 5px 30px;font-size: 25px;height: 50px;">提交</button>
+        <div class="stage2" ref="stage2">
+            <div class="bg" style="background-image: url('../static/p1_bg.jpg')"></div>
+            <img @click="hideStage2"  src="../static/p1_startbtn.png"  style="position: absolute; width: 57%; left: 21.5%; top: 64%;" alt="" />
+            <img @click="navigateToForm" src="../static/p1_jumpbtn.png" style="position: absolute; width: 52.3%; left: 23.7%; top: 85%" alt="" />
         </div>
     </div>
-
 </template>
 
 <script lang="ts">
@@ -50,13 +56,69 @@
         })();
 
         toResult(){
-            uni.navigateTo({
-                url: "/pages/result?result=0&showBottle=true",
-            })
+            this.hideStage1();
+            setTimeout(()=>{
+                uni.navigateTo({
+                    url: `/pages/result?result=${this.calculateResultIndex()}&showBottle=true`,
+                })
+            }, 500);
+        }
+
+        calculateResultIndex(){
+            return 0;
+        }
+
+        hideStage1(){
+            (this.$refs.stage1 as HTMLDivElement).classList.add("hide-top");
+        }
+
+        hideStage2(){
+            (this.$refs.stage2 as HTMLDivElement).classList.add("hide-left");
+        }
+
+        navigateToForm(){
+            window.location.href = "https://www.wjx.cn/jq/59367245.aspx";
         }
     }
 </script>
 
 <style scoped>
-
+    div.stage1{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    div.stage2{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    div.bg{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-repeat: no-repeat;
+        background-position: center 0;
+        background-size: cover;
+    }
+    div.stage1.hide-left,
+    div.stage2.hide-left{
+        left: auto;
+        right: 100%;
+        transition: right ease-in-out 0.5s
+    }
+    div.stage1.hide-top,
+    div.stage2.hide-top{
+        top: auto;
+        bottom: 100%;
+        transition: bottom ease-in-out 0.5s
+    }
 </style>
