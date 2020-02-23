@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="stage1" ref="stage1">
+        <div class="stage1 hide-right" ref="stage1">
+            <div class="bg" style="position: fixed; background-image: url('../static/p2_bg.jpg')"></div>
             <img src="../static/p2_title.png"
                  style="position:relative; width: 70%; left: 15%; margin-top: 10%; margin-bottom: 2%;" />
             <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
@@ -74,6 +75,7 @@
 
         hideStage2(){
             (this.$refs.stage2 as HTMLDivElement).classList.add("hide-left");
+            (this.$refs.stage1 as HTMLDivElement).classList.remove("hide-right")
         }
 
         navigateToForm(){
@@ -113,6 +115,12 @@
     div.stage2.hide-left{
         left: auto;
         right: 100%;
+        transition: right ease-in-out 0.5s
+    }
+    div.stage1.hide-right,
+    div.stage2.hide-right{
+        right: auto;
+        left: 100%;
         transition: right ease-in-out 0.5s
     }
     div.stage1.hide-top,
