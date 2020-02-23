@@ -1,9 +1,20 @@
 <template>
-    <div>
-        <div v-if="showBottle">
-            <img :src="RESULT_TITLE_LIST[resultIndex]"
-                 style="position:relative; width: 70%; left: 15%; margin-top: 10%; margin-bottom: 2%;" />
-            <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+    <div :style="'background: rgba(' + COLOURS[resultIndex * 2] + ', 0.3)'">
+        <div v-if="showBottle" style="margin-bottom: 40px">
+            <div style="position: relative; height: 120px">
+                <div style="position: absolute; top: 0; left: -20px; font-size: 60px; color: rgba(255, 255, 255, 70%)">
+                    {{ TEXT[resultIndex].name }}
+                </div>
+                <div style="position: relative; top: 30px; width: 85%; left: 15%; font-size: 16px;">
+                    <span v-html="TEXT[resultIndex].normal"></span>
+                    <br>
+                    <span style="font-size: 20px">
+                        {{ TEXT[resultIndex].largePrefix }}
+                        <strong :style="'color: rgb(' + COLOURS[resultIndex * 2 + 1] + ')'">{{ TEXT[resultIndex].largeBold }}</strong> {{ TEXT[resultIndex].largeSuffix }}
+                    </span>
+                </div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-around; margin: 0 20px;">
                 <bottle v-for="(item, index) in bottleList" :key="item.word" v-model="item.value" :word="item.word"
                         :lineIndex="Math.floor(index / 5)" :columnIndex="index % 5"
                         :changeable="false"
@@ -65,6 +76,48 @@
             word: string,
             value: number
         }> = getApp().globalData["bottleList"];
+
+        COLOURS: Array<string> = [
+            "249, 174, 165",
+            "227, 78, 71",
+            "37, 209, 198",
+            "43, 187, 179",
+            "251, 208, 101",
+            "241, 123, 46",
+            "144, 200, 106",
+            "64, 179, 79"
+        ];
+        TEXT: Array<{
+            name: string,
+            normal: string,
+            largePrefix: string,
+            largeBold: string,
+            largeSuffix: string
+        }> = [{
+            name: "Coordination",
+            normal: "做日常的事务，演绎不平常的精彩！",
+            largePrefix: "",
+            largeBold: "常务部",
+            largeSuffix: "等你来 pick！",
+        }, {
+            name: "Technology",
+            normal: "不管你是技术大佬<br>还是零(未)基(来)础(的)同(大)学(佬)，",
+            largePrefix: "",
+            largeBold: "技术部",
+            largeSuffix: "真诚欢迎你的加入！",
+        }, {
+            name: "Game",
+            normal: "热爱游戏，崇尚体育精神？<br>充满创意，喜欢制造乐趣？",
+            largePrefix: "",
+            largeBold: "赛事部",
+            largeSuffix: "期待你的到来！",
+        }, {
+            name: "Project",
+            normal: "收获快乐，点出全方位的社工技能点！",
+            largePrefix: "We Want You! —— ",
+            largeBold: "项目部",
+            largeSuffix: "",
+        }];
     }
 </script>
 
