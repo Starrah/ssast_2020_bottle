@@ -6,7 +6,6 @@
             @click="bottleImageOnClick">
         </div>
         {{ word }}
-        <!--= {{ theValue }} ({{ lineIndex }}, {{ columnIndex }})-->
     </div>
 </template>
 
@@ -70,6 +69,9 @@
   background: transparent;
   text-align: center;
   font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  overflow: visible;
 }
 .bottle {
   background-size: cover;
