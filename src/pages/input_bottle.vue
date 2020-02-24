@@ -11,7 +11,7 @@
                         style="width: calc((100% - 40px)/5); margin: 10px 0;" />
             </div>
             <div style="display: flex; justify-content: center">
-                <button class="cu-btn bg-gradual-green radius" @click="toResult"
+                <button class="cu-btn bg-gradual-blue round" @click="toResult"
                         style="margin-top: 20px; padding: 5px 30px;font-size: 25px;height: 50px;">提交</button>
             </div>
         </div>
@@ -91,6 +91,7 @@
                     minIndex = i;
                 }
             }
+            console.log(resArr);
             return minIndex;
         }
 
@@ -127,6 +128,7 @@
         bottom: 0;
     }
     div.bg{
+        z-index: -1;
         position: absolute;
         width: 100%;
         height: 100%;
@@ -138,9 +140,6 @@
     }
     div.stage1 div.bg{
         z-index: -2;
-    }
-    div.stage2 div.bg{
-        z-index: -1;
     }
     div.stage1.hide-left,
     div.stage2.hide-left{

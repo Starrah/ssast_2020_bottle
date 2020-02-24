@@ -7,7 +7,7 @@
         </navigator>
         <navigator v-for="(item,index) in elements" :key="index" v-if="index !== excludeIndex"
                    hover-class="none" :url="`/pages/result?result=${index}`"
-                   class="nav-li" navigateTo :class="'bg-' + item.color"
+                   class="nav-li myButton" navigateTo :class="'bg-' + item.color"
                    :style="[{animation: 'show ' + ((index+2)*0.2+1) + 's 1'}]" >
             <view class="nav-title">{{item.title}}</view>
             <view class="nav-name">{{item.name}}</view>
@@ -191,5 +191,9 @@
         100% {
             transform: translateY(0px);
         }
+    }
+
+    .myButton:active{
+        transform: translate(10px, 10px);
     }
 </style>

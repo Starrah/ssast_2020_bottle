@@ -1,6 +1,7 @@
 <template>
-    <div :style="'background: rgba(' + COLOURS[resultIndex * 2] + ', 0.3)'">
-        <div v-if="showBottle" style="margin-bottom: 40px">
+    <div>
+        <div class="bg" style="position: fixed;" :style="'background-color: '+ bgColor"></div>
+        <div style="margin-bottom: 40px">
             <div style="position: relative; height: 120px">
                 <div style="position: absolute; top: 0; left: -20px; font-size: 60px; color: rgba(255, 255, 255, 70%)">
                     {{ TEXT[resultIndex].name }}
@@ -53,6 +54,17 @@
             this.showBottle = !!param.showBottle;
             this.resultIndex = Number(param.result);
         }
+
+        get bgColor(){
+            const res = [
+                "rgba(249, 174, 165, 0.5)",
+                "rgba(37, 209, 198, 0.5)",
+                "rgba(251, 208, 101, 0.5)",
+                "rgba(144, 200, 106, 0.5)"
+            ];
+            return res[this.resultIndex];
+        }
+
         RESULT_TITLE_LIST = [
             "../static/p3_title_cwb.png",
             "../static/p3_title_cwb.png",
@@ -122,14 +134,15 @@
 </script>
 
 <style scoped>
-    /*覆盖uniapp自带的按钮边框*/
-    button.myButton:after{
-        width: 0;
-        height: 0;
-        border: none;
-    }
-
-    button.myButton:active{
-        transform: translate(10px, 10px);
+    div.bg{
+        z-index: -1;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-repeat: no-repeat;
+        background-position: center 0;
+        background-size: cover;
     }
 </style>
