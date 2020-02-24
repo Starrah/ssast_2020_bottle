@@ -1,7 +1,7 @@
 <template>
     <div class="bottle-container">
         <div :class="{ 'bottle': true, 'bottle-clicked': bottleClicked }"
-            :style="'background-image: ' + backgroundImageUrl()"
+            :style="'background-image: url(' + backgroundImageUrl(this.theValue) + ')'"
             @mousedown="bottleImageOnMouseDown"
             @click="bottleImageOnClick">
         </div>
@@ -25,9 +25,17 @@
 
         theValue: number = 0;
         bottleClicked: boolean = false;
+        images: Array<object> = [];
 
         created() {
             this.theValue = this.value;
+            if (this.changeable) {
+                for (var i = 0; i <= 5; i++) {
+                    var im = new Image();
+                    im.src = this.backgroundImageUrl(i);
+                    this.images.push(im);
+                }
+            }
         }
 
         //点击后修改value时，请调用此函数。
@@ -37,10 +45,10 @@
             //父对象保证监听此setValue事件从而修改value的值、
         }
 
-        backgroundImageUrl() {
-            return 'url(../static/bottle_' +
-                (this.value === 0 ? '' : this.lineIndex.toString()) +
-                this.value + '.png)';
+        backgroundImageUrl(value) {
+            return '../static/bottle_' +
+                (value === 0 ? '' : this.lineIndex.toString()) +
+                value + '.png';
         }
 
         bottleImageOnMouseDown(e) {
@@ -61,7 +69,7 @@
 .bottle-container {
   background: transparent;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
 }
 .bottle {
   background-size: cover;

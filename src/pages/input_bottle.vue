@@ -5,7 +5,7 @@
             <div style="position:relative; width: 100%; left: 0; margin-top: 24px; margin-bottom: 2%; text-align: center; font-size: 24px;">
             点击每个小瓶子即可填充哦～
             </div>
-            <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-around; margin: 0 20px;">
                 <bottle v-for="(item, index) in bottleList" :key="item.word" v-model="item.value" :word="item.word"
                         :lineIndex="Math.floor(index / 5)" :columnIndex="index % 5"
                         style="width: calc((100% - 40px)/5); margin: 10px 0;" />
